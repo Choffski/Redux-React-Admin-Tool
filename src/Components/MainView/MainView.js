@@ -10,7 +10,6 @@ class Mainview extends Component {
       <div className="mainview">
 
 
-      <h1>Main page</h1>
 
         <Navbar />
 

@@ -5,7 +5,9 @@
   "start": "1482390802" ,
   "end" : "1482436800",
   "category" : "Front-end development",
-  "status" : "active"
+  "status" : "active",
+  "id" : "45678"
+
 
 },{
   "name": "UI / UX design for E-commerce",
@@ -14,7 +16,9 @@
   "start": "1482390802" ,
   "end" : "1482436800",
   "category" : "UI/UX",
-  "status" : "active"
+  "status" : "active",
+  "id" : "34567"
+
 
 
 
@@ -25,7 +29,8 @@
   "start": "1482390802" ,
   "end" : "1482436800",
   "category" : "Back-end development",
-  "status" : "active"
+  "status" : "active",
+  "id" : "12345"
 
 
 
@@ -37,7 +42,9 @@
     "start": null ,
     "end" : null,
     "category" : "Front-end development",
-    "status" : "pending"
+    "status" : "pending",
+    "id" : "23456"
+
 
 }
 ]

@@ -23,6 +23,12 @@ function getProjectData(){
 }
 
 
+app.get('/getProjects', function (req, res) {
+  let projects = getProjectData();
+
+    res.send(projects);
+})
+
 
   app.post('/validateToken', function(req, res){
 
@@ -65,7 +71,7 @@ function getProjectData(){
           'data': {
             'token' :
                   jwt.sign({
-                    data: req.body.user
+                    data: userdata
                   }, config.secret, {expiresIn : '1h'}),
             'status': 'success'
           },
