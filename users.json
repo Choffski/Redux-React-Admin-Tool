@@ -1,0 +1,23 @@
+[{
+  "fname": "Samuli",
+  "lname": "Laine",
+  "id" : "01",
+  "user": "Samuli",
+  "password" : "asd"
+
+},{
+  "fname": "Jane",
+  "lname": "Doe",
+  "id" : "02",
+  "user": "Jane",
+  "password" : "asd"
+
+},{
+  "fname": "John",
+  "lname": "Doe",
+  "id" : "03",
+  "user": "John",
+  "password" : "asd"
+
+}
+]

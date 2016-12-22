@@ -4,9 +4,10 @@ import 'whatwg-fetch'
 
 
 import Login from './Components/Login/Login';
-import Leaderboard from './Components/Leaderboards/Leaderboards';
+import Projects from './Components/Projects/Projects';
 import MainView from './Components/MainView/MainView';
 import Profile from './Components/Profile/Profile';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 
 class App extends Component {
@@ -16,8 +17,9 @@ class App extends Component {
           <Route path="/" component={Login}>
           </Route>
           <Route path="/main" component={MainView} onEnter ={checkLogin}>
+              <IndexRoute component={Dashboard}></IndexRoute>
               <Route path="profile" component={Profile}></Route>
-              <Route path="leaderboard" component={Leaderboard}></Route>
+              <Route path="leaderboard" component={Projects}></Route>
           </Route>
 
         </Router>

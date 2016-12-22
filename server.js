@@ -3,13 +3,25 @@ var express = require('express')
 var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
-
+var fs = require('fs');
 
 var app = express();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+function getUserData() {
+  let content = fs.readFileSync('./users.json');
+  return JSON.parse(content);
+}
+
+function getProjectData(){
+
+    let content = fs.readFileSync('./projects.json');
+    return JSON.parse(content);
+}
+
 
 
   app.post('/validateToken', function(req, res){
@@ -38,38 +50,37 @@ app.use(bodyParser.json())
   })
 
   app.post('/login', function(req, res){
-    console.log(req.body);
 
-    if(req.body.user == 'Samuli' && req.body.password == 'asd'){
-
-      jwt.sign({
-        data: req.body.user
-      }, config.secret, {expiresIn : '1h'});
-
-
-      res.send({
-        'statusCode':200,
-        'data': {
-          'token' :
-                jwt.sign({
-                  data: req.body.user
-                }, config.secret, {expiresIn : '1h'}),
-          'status': 'success'
-        },
-        'error': null
-      })
+    let users = getUserData();
+    users.map(function(userdata){
+      if(userdata.user == req.body.user && userdata.password === req.body.password)
+      {
+        jwt.sign({
+          data: req.body.user
+        }, config.secret, {expiresIn : '1h'});
 
 
+        res.send({
+          'statusCode':200,
+          'data': {
+            'token' :
+                  jwt.sign({
+                    data: req.body.user
+                  }, config.secret, {expiresIn : '1h'}),
+            'status': 'success'
+          },
+          'error': null
+        })
+      }
+    })
 
-    } else{
       res.send({
         'statusCode':400,
         'data': null,
         'error': 'Invalid Credentials'
       })
-    }
 
-    res.send('ok then');
+
   })
 
   app.get('/logout', function(req,res){

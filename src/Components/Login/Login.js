@@ -13,7 +13,7 @@ class Login extends Component {
   }
 
 
-  handleSubmit(e){
+  handleSubmit = (e) =>{
     e.preventDefault();
 
      let user = this.userInput.value.trim();
@@ -55,18 +55,18 @@ return resp.json();
         <br />
         <label>
           Username:
-          <input type="text" name="Username" placeholder="your username" ref={node => {
+          <input type="text" name="Username" placeholder="Your Username" ref={node => {
             this.userInput = node
           }} />
         </label>
         <label>
           Password:
-          <input type="password" name="Password" ref={node =>{
+          <input type="password" name="Password" placeholder="Your Password" ref={node =>{
             this.passwordInput = node
           }}/>
         </label>
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Login" />
       </form>
     );
   }
