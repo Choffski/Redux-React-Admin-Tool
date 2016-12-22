@@ -19,9 +19,9 @@ class App extends Component {
           <Route path="/main" component={MainView} onEnter ={checkLogin}>
               <IndexRoute component={Dashboard}></IndexRoute>
               <Route path="profile" component={Profile}></Route>
-              <Route path="projects" component={Projects}>
-                <Route path="/:id" component={Projects}></Route>
-              </Route>
+              <Route path="projects" component={Projects}></Route>
+              <Route path="projects/:id" component={Projectdetail}></Route>
+
           </Route>
 
         </Router>

@@ -5,13 +5,13 @@ class ProjectlistItem extends Component {
   render() {
     return (
 
-    <a className="list-item">
-      <Link to={'/main/projects/' + this.props.id}>
-      {this.props.name} -- {this.props.category}
+    <button className="list-item">
+      <Link to={'/main/projects/' + this.props.data.id}>
+      {this.props.data.name} -- {this.props.data.category}
       <br/>
-      Status: {this.props.status}
+      Status: {this.props.data.status}
     </Link>
-    </a>
+    </button>
     );
   }
 }

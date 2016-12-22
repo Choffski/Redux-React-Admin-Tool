@@ -36,6 +36,8 @@ class Projects extends Component {
       <div className="mainContent">
 
         <Projectlist projects={this.state.projects}/>
+
+
       </div>
     );
   }

@@ -28,13 +28,16 @@ class Navbar extends Component {
 
           {/*  alt test */}
 
-          <div className="navBar">
-            <button><Link to="main">Dashboard</Link></button>
-            <button><Link to="main/projects">Projects</Link></button>
-            <button><Link to="main/profile">Profile</Link></button>
-            <button onClick={this.handleLogout}>Logout</button>
+          <ul className="navBar">
+            <li className="btn "><Link to="main"  className="btn btn-success btn-width-100" >Dashboard</Link></li>
+            <li className="btn"><Link to="main/projects" className="btn btn-success btn-width-100">Projects</Link></li>
+            <li className="btn"><Link to="main/profile" className="btn btn-success btn-width-100">Profile</Link></li>
 
-          </div>
+          </ul>
+
+          <ul>
+            <li className="btn btn-warning" onClick={this.handleLogout}>Logout</li>
+          </ul>
 
       </div>
     );

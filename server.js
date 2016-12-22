@@ -29,6 +29,36 @@ app.get('/getProjects', function (req, res) {
     res.send(projects);
 })
 
+app.get('/getProjectDetail/:id', function(req,res){
+
+  console.log(req.params);
+
+  let projects = getProjectData();
+  projects.map(function(project){
+    if(project.id == req.params.id){
+      res.send(project);
+    }
+  })
+
+
+})
+
+
+app.get('/getUser/:id', function(req,res){
+
+  console.log(req.params);
+
+  let users = getUserData();
+  users.map(function(user){
+    if(user.id == req.params.id){
+      res.send(user);
+    }
+  })
+
+
+})
+
+
 
   app.post('/validateToken', function(req, res){
 
