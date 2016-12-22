@@ -16,3 +16,13 @@ body {
   padding: 10px 10px 10px 10px;
   margin-right: 1%;
 }
+
+
+.list{
+  display: flex;
+  flex-direction: column;
+
+  &-item{
+    margin: 5px;
+  }
+}

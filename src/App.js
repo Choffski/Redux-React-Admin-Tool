@@ -8,7 +8,7 @@ import Projects from './Components/Projects/Projects';
 import MainView from './Components/MainView/MainView';
 import Profile from './Components/Profile/Profile';
 import Dashboard from './Components/Dashboard/Dashboard';
-
+import Projectdetail from './Components/Projects/Projectdetail';
 
 class App extends Component {
   render() {
@@ -20,7 +20,7 @@ class App extends Component {
               <IndexRoute component={Dashboard}></IndexRoute>
               <Route path="profile" component={Profile}></Route>
               <Route path="projects" component={Projects}>
-                <Route path="projects/:id" component={Projects}></Route>
+                <Route path="/:id" component={Projects}></Route>
               </Route>
           </Route>
 

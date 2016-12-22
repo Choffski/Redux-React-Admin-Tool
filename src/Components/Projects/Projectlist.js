@@ -13,15 +13,13 @@ class Projectlist extends Component {
     let listItems;
     if(this.props.projects){
       listItems = this.props.projects.map(proj =>{
-        return <ProjectlistItem status={proj.status} name={proj.name} category={proj.category}/>
+        return <ProjectlistItem status={proj.status} name={proj.name} key={proj.id} id={proj.id} category={proj.category}/>
       })
 
     }
     return (
-      <div>
-        <ul>
-        {listItems}
-        </ul>
+      <div className="list">
+          {listItems}
       </div>
 
     );
