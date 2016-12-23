@@ -5,6 +5,7 @@ import Navbar from '../Shared/Navbar';
 class Mainview extends Component {
 
   render() {
+
     return (
       <div className="mainview">
 

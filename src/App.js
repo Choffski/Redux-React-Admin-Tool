@@ -9,6 +9,7 @@ import MainView from './Components/MainView/MainView';
 import Profile from './Components/Profile/Profile';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Projectdetail from './Components/Projects/Projectdetail';
+import AddProject from './Components/Add/AddProject';
 
 class App extends Component {
   render() {
@@ -19,7 +20,11 @@ class App extends Component {
           <Route path="/main" component={MainView} onEnter ={checkLogin}>
               <IndexRoute component={Dashboard}></IndexRoute>
               <Route path="profile" component={Profile}></Route>
-              <Route path="projects" component={Projects}></Route>
+              <Route path="projects" component={Projects}>
+
+
+              </Route>
+              <Route path="add" component={AddProject}></Route>
               <Route path="projects/:id" component={Projectdetail}></Route>
 
           </Route>

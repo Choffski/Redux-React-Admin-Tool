@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 import 'whatwg-fetch'
 
-
+import Detailsdata from './Projectdetails/Detailsdata';
+import EditProject from './Projectdetails/EditProject';
 
 class Projectdetail extends Component {
 
@@ -21,7 +22,15 @@ class Projectdetail extends Component {
       })
 
   }
+  allowEdit = () =>{
 
+    if(!this.state.editable){
+    this.setState({editable:true})
+  } else{
+    this.setState({editable:false})
+
+  }
+  }
 
   findUser = (id) =>{
     fetch('http://localhost:8000/getUser/'+id, {
@@ -40,10 +49,11 @@ class Projectdetail extends Component {
   constructor(){
     super();
     this.findUser = this.findUser.bind(this);
-
+    this.allowEdit = this.allowEdit.bind(this);
     this.state={
       project:{},
-      user:{}
+      user:{},
+      editable:false
     }
   }
 
@@ -54,12 +64,27 @@ class Projectdetail extends Component {
   render() {
     console.log(this.state);
     return (
-      <div>
-        Project: {this.state.project.name}
-        <br/>
-        Assigned: {this.state.user.fname} {this.state.user.lname}
-        <br/>
-        <button><Link to="main/projects"> Back</Link></button>
+      <div className="detailContent">
+        <div className="btn-bar">
+        <button ><Link to="main/projects" className="btn btn-calm"> Back</Link></button>
+
+        {
+          this.state.editable?
+          <button className="btn btn-warning" onClick={this.allowEdit}>Cancel Edit</button>
+          :
+          <button className="btn btn-success" onClick={this.allowEdit}>Edit</button>
+
+        }
+
+        </div>
+          {
+            this.state.editable?
+            <EditProject project={this.state.project} />
+            :
+            <Detailsdata project={this.state.project} user={this.state.user} />
+
+          }
+
       </div>
 
     );

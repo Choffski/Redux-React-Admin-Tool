@@ -6,6 +6,18 @@ import Projectlist from './Projectlist'
 
 class Projects extends Component {
 
+  handleDelete = (id) =>{
+    console.log('finally handling delete ' + id);
+    let projects = this.state.projects;
+    let index = projects.findIndex( x => x.id === id)
+    projects.splice(index, 1);
+    this.setState({projects:projects})
+
+
+    // Trigger API call to delete project from storage and reload projects
+
+  }
+
 
   componentDidMount() {
     console.log('they did mount :) ')
@@ -22,20 +34,27 @@ class Projects extends Component {
 
   }
 
+  componentWillUnmount(){
+    console.log('Swapping between dashboard, projects and profile')
+  }
+
 
   constructor(){
     super();
 
+    
+
     this.state = {
       projects : []
     }
+    this.handleDelete = this.handleDelete.bind(this);
 
   }
   render() {
     return (
       <div className="mainContent">
 
-        <Projectlist projects={this.state.projects}/>
+        <Projectlist onDelete={this.handleDelete} projects={this.state.projects}/>
 
 
       </div>
