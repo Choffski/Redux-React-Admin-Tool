@@ -21,8 +21,8 @@ Download or clone the [Repository](https://github.com/Choffski/React-Admin-Tool)
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ cd dillinger
-$ npm install -d
+$ cd react-admin-tool
+$ npm install 
 $ node server
 $ npm start
 ```
