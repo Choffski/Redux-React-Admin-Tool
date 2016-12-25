@@ -14,15 +14,14 @@ Dummy Node backend for authentication and data holding.
 
 ### Installation
 
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
+React Admin Tool requires [Node.js](https://nodejs.org/) v4+ to run.
 
 Download or clone the [Repository](https://github.com/Choffski/React-Admin-Tool).
 
-Install the dependencies and devDependencies and start the server.
-
+To run the project run following commands in Terminal:
 ```sh
 $ cd react-admin-tool
-$ npm install 
+$ npm install
 $ node server
 $ npm start
 ```

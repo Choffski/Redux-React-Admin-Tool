@@ -1,6 +1,6 @@
-
+import 'whatwg-fetch'
 // Helper function for fetch
-export function checkStatus(response) {
+ const checkStatus = (response) =>{
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
@@ -8,4 +8,44 @@ export function checkStatus(response) {
     error.response = response
     throw error
   }
+}
+
+
+
+export const checkLogin = (nextStage, replace, callback) => {
+
+fetch('http://localhost:8000/validateToken', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({
+token: sessionStorage.getItem('token')
+})
+}).then(checkStatus)
+.then(resp => {
+  return resp.json();
+}).then(respObj =>{
+  console.log(respObj);
+  if(respObj.data == null){
+    replace('/')
+  }
+  callback();
+}).catch(function(error) {
+    console.log('request failed', error)
+    callback();
+
+  })
+
+
+}
+
+export const checkStatuss = (response) =>{
+ if (response.status >= 200 && response.status < 300) {
+   return response
+ } else {
+   var error = new Error(response.statusText)
+   error.response = response
+   throw error
+ }
 }

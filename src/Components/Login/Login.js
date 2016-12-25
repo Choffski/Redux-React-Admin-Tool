@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 import 'whatwg-fetch'
-
+import { checkStatus } from '../../Helpers/Helpers'
 
 class Login extends Component {
 
@@ -32,7 +32,7 @@ class Login extends Component {
    user: user,
    password:password,
  })
-}).then(resp =>{
+}).then(checkStatus).then(resp =>{
 return resp.json();
 }).then(respObj =>{
   console.log(respObj);
@@ -44,7 +44,9 @@ return resp.json();
     hashHistory.push('/main');
 
   }
-})
+}).catch(function(error) {
+    console.log('request failed', error)
+  })
 
   }
 
