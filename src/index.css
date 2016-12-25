@@ -17,10 +17,27 @@ body {
   margin-right: 1%;
 }
 
+.add-form{
+  width: 100%;
+  height: auto;
+  padding: 10px 5px 10px 5px;
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+
+}
+.add-form-label{
+    width: 75%;
+}
+.add-form-input{
+  width: 100%;
+}
 
 .list{
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 800px;
 
 }
 

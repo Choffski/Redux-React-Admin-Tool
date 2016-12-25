@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 import 'whatwg-fetch'
 
+import { checkStatus } from '../../Helpers/Helpers'
+
+
 import Detailsdata from './Projectdetails/Detailsdata';
 import EditProject from './Projectdetails/EditProject';
 
@@ -91,15 +94,7 @@ class Projectdetail extends Component {
   }
 }
 
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
-  } else {
-    var error = new Error(response.statusText)
-    error.response = response
-    throw error
-  }
-}
+
 
 
 export default Projectdetail;

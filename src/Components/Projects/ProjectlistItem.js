@@ -17,7 +17,7 @@ class ProjectlistItem extends Component {
        {this.props.data.category}
       </Link>
     </div>
-    <div className="col-33">    <a className="btn btn-danger" onClick={this.deleteEvent.bind(this, this.props.data.id)}> delete</a>
+    <div className="col-33">  <a className="btn btn-danger" onClick={this.deleteEvent.bind(this, this.props.data.id)}> delete</a>
 </div>
     </div>
     );

@@ -29,6 +29,12 @@ app.get('/getProjects', function (req, res) {
     res.send(projects);
 })
 
+app.get('/getUsers', function (req, res) {
+  let users = getUserData();
+
+  res.send(users)
+})
+
 app.get('/getProjectDetail/:id', function(req,res){
 
   console.log(req.params);
