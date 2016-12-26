@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch'
-import { checkStatus } from '../../Helpers/Helpers'
+import { getFetch } from '../../Helpers/Helpers'
 
 import Projectlist from './Projectlist'
 import Addproject from '../Add/Addproject'
@@ -23,7 +23,7 @@ class Projects extends Component {
   } else{
     this.setState({addable:false})
 
-  }
+    }
   }
 
   handleAdding = () =>{
@@ -47,7 +47,6 @@ class Projects extends Component {
   }
 
   changeVal = (e) =>{
-
     let proj = this.state.newProject;
     proj[e.target.name] = e.target.value;
       this.setState({newProject : proj})
@@ -55,29 +54,15 @@ class Projects extends Component {
   }
 
 
-  componentDidMount() {
-    console.log('they did mount :) ')
-    fetch('http://localhost:8000/getProjects', {
-    'method' : 'GET'}).then(checkStatus)
-    .then(resp =>{
-      return resp.json();
-    }).then(respArr =>{
-      this.setState({projects: respArr});
-    }).catch(function(error) {
-        console.log('request failed', error)
-        return
-      })
+  componentWillMount() {
 
-      fetch('http://localhost:8000/getUsers', {
-      'method' : 'GET'}).then(checkStatus)
-      .then(resp =>{
-        return resp.json();
-      }).then(respArr =>{
-        this.setState({users: respArr});
-      }).catch(function(error) {
-          console.log('request failed', error)
-          return
-        })
+    getFetch('getProjects', data =>{
+      this.setState({projects: data})
+    })
+
+    getFetch('getUsers', data => {
+      this.setState({users: data})
+    })
 
   }
 
@@ -88,8 +73,6 @@ class Projects extends Component {
 
   constructor(){
     super();
-
-
 
     this.state = {
       projects : [],
@@ -127,7 +110,6 @@ class Projects extends Component {
   render() {
     return (
       <div className="mainContent">
-
         {
           this.state.addable?
           <div>
@@ -138,8 +120,6 @@ class Projects extends Component {
           <button className="btn btn-success" onClick={this.allowAdding}> Add New Project</button>
         }
         <Projectlist onDelete={this.handleDelete} projects={this.state.projects}/>
-
-
       </div>
     );
   }
