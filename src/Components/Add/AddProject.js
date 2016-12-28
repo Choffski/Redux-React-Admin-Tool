@@ -5,7 +5,7 @@ import Selectoptions from './Selectoptions'
 
 
 
-class Addproject extends Component {
+class AddProject extends Component {
   constructor(){
     super();
 
@@ -87,4 +87,4 @@ this.props.onChange(e)
 
 
 
-export default Addproject;
+export default AddProject;

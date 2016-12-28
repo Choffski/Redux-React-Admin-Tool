@@ -12,7 +12,8 @@ import 'whatwg-fetch'
   }
 }
 
-export const getFetch = (path, callback) => {
+
+export const get = (path, callback) => {
 
 fetch('http://localhost:8000/' + path, {
   method: 'GET'
@@ -28,6 +29,8 @@ fetch('http://localhost:8000/' + path, {
     return
   })
 }
+
+
 export const checkLogin = (nextStage, replace, callback) => {
 fetch('http://localhost:8000/validateToken', {
 method: 'POST',

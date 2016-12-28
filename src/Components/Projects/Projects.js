@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch'
-import { getFetch } from '../../Helpers/Helpers'
+import { connect } from 'react-redux';
+
+import * as user from '../../Actions/userActions'
+import * as project from '../../Actions/projectActions'
 
 import Projectlist from './Projectlist'
-import Addproject from '../Add/Addproject'
+import Addproject from '../Add/AddProject'
+
+
+
 
 class Projects extends Component {
+
+    componentWillMount() {
+      this.props.dispatch(user.getAllUsers())
+      this.props.dispatch(project.getAllProjects());
+
+    }
+    componentWillUnmount(){
+      console.log('Swapping between dashboard, projects and profile')
+    }
 
   handleDelete = (id) =>{
     console.log('finally handling delete ' + id);
@@ -53,30 +68,10 @@ class Projects extends Component {
     console.log(this.state);
   }
 
-
-  componentWillMount() {
-
-    getFetch('getProjects', data =>{
-      this.setState({projects: data})
-    })
-
-    getFetch('getUsers', data => {
-      this.setState({users: data})
-    })
-
-  }
-
-  componentWillUnmount(){
-    console.log('Swapping between dashboard, projects and profile')
-  }
-
-
   constructor(){
     super();
 
     this.state = {
-      projects : [],
-      users :[],
       addable : false,
       newProject:{
         name:"",
@@ -108,18 +103,19 @@ class Projects extends Component {
 
   }
   render() {
+    console.log(this.props);
     return (
       <div className="mainContent">
         {
           this.state.addable?
           <div>
           <button className="btn btn-warning" onClick={this.allowAdding}> Cancel</button>
-          <Addproject users={this.state.users} categories={this.state.options} onSubmit={this.handleAdding} onChange={this.changeVal} project={this.state.newProject}/>
+          <Addproject users={this.props.users} categories={this.state.options} onSubmit={this.handleAdding} onChange={this.changeVal} project={this.state.newProject}/>
           </div>
           :
           <button className="btn btn-success" onClick={this.allowAdding}> Add New Project</button>
         }
-        <Projectlist onDelete={this.handleDelete} projects={this.state.projects}/>
+        <Projectlist onDelete={this.handleDelete} projects={this.props.projects}/>
       </div>
     );
   }
@@ -134,6 +130,16 @@ Projectlist.propTypes = {
   options: React.PropTypes.array
 }
 
+function mapStateToProps(store) {
+  return{
+      fetchingUsers: store.users.fetching,
+      fetchingProjects: store.projects.fetching,
+      users: store.users.users,
+      projects: store.projects.projects,
+      newProject: store.projects.newProject
+  }
+}
 
 
-export default Projects;
+
+export default connect(mapStateToProps)(Projects);

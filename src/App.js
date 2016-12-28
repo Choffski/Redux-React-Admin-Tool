@@ -13,10 +13,6 @@ import Projectdetail from './Components/Projects/Projectdetail';
 
 
 
-
-
-
-
 class App extends Component {
   render() {
     return (
