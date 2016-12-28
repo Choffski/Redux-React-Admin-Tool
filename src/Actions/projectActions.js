@@ -26,6 +26,12 @@ export function AddProject(){
   }
 }
 
+export function deleteProject(key){
+  return function (dispatch){
+    dispatch({type:'DELETE_PROJECT', payload:key});
+  }
+}
+
 
 // export function getUsers() {
 //   return function(dispatch){

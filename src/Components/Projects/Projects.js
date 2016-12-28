@@ -18,17 +18,11 @@ class Projects extends Component {
       this.props.dispatch(project.getAllProjects());
 
     }
-    componentWillUnmount(){
-      console.log('Swapping between dashboard, projects and profile')
-    }
 
   handleDelete = (id) =>{
-    console.log('finally handling delete ' + id);
-    let projects = this.state.projects;
-    let index = projects.findIndex( x => x.id === id)
-    projects.splice(index, 1);
-    this.setState({projects:projects})
-    // Trigger API call to delete project from storage and reload projects
+
+    let index = this.props.projects.findIndex( x => x.id === id)
+    this.props.dispatch(project.deleteProject(index))
   }
 
   allowAdding = () =>{

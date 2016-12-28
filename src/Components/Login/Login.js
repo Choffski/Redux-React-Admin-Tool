@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 import 'whatwg-fetch'
-import { checkStatus } from '../../Helpers/Helpers'
+import { login } from '../../Actions/userActions'
+
+import { connect } from 'react-redux';
+
 
 class Login extends Component {
 
@@ -15,41 +18,25 @@ class Login extends Component {
 
   handleSubmit = (e) =>{
     e.preventDefault();
-
      let user = this.userInput.value.trim();
      let password = this.passwordInput.value.trim();
 
-     if(!user || !password) return;
-     console.log(user + ' '+ password)
+     this.props.dispatch(login(user,password))
+     .then(resp =>{
+       if(resp.data.data){
+       sessionStorage.setItem('token', resp.data.data.token);
+       this.props.dispatch({type:'LOGIN_FULFILLED'});
 
 
-     fetch('http://localhost:8000/login', {
- method: 'POST',
- headers: {
-   'Content-Type': 'application/json'
- },
- body: JSON.stringify({
-   user: user,
-   password:password,
- })
-}).then(checkStatus).then(resp =>{
-return resp.json();
-}).then(respObj =>{
-  console.log(respObj);
-
-  if(respObj.error){
-    alert(respObj.error);
-  } else{
-    sessionStorage.setItem('token', respObj.data.token);
-    hashHistory.push('/main');
-
+       hashHistory.push('/main');
+     } else {
+       this.props.dispatch({type:'LOGIN_REJECTED', payload:resp.data.error})
+     }
+     })
+     .catch(err =>{
+       this.props.dispatch({type:'LOGIN_REJECTED', payload:err})
+     })
   }
-}).catch(function(error) {
-    console.log('request failed', error)
-  })
-
-  }
-
 
   render() {
     return (
@@ -74,6 +61,4 @@ return resp.json();
   }
 }
 
-
-
-export default Login;
+export default connect()(Login);

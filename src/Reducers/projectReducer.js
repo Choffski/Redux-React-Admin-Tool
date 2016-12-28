@@ -25,6 +25,12 @@ export default function reducer (state = initialState, action){
       break;
     }
     ////////////////////////////////
+    case "DELETE_PROJECT":{
+      return {
+        projects: state.projects.filter( (item, index) => index !== action.payload)
+      }
+
+}
 
 
     default: return state;

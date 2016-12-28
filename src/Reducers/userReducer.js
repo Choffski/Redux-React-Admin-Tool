@@ -32,7 +32,7 @@ export default function reducer (state = initialState, action){
       break;
     }
     case "LOGIN_FULFILLED":{
-      return {...state, fetching:false, activeUser:action.payload}
+      return {...state, fetching:false, isLoggedIn:true}
       break;
     }
     case "LOGIN_REJECTED":{

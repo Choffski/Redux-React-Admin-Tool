@@ -1,4 +1,5 @@
 import 'whatwg-fetch'
+import axios from 'axios'
 import * as fetch from '../Helpers/Helpers';
 
 
@@ -14,23 +15,19 @@ export function getAllUsers(){
   }
 }
 
-export function testDummy(){
-
-    return{
-      type:"FETCH_USERS_DUMMY",
-      payload:{
-        name:'Samuli',
-        id:'01'
-      }
-
+export function login(user, password){
+  return  dispatch => {
+    dispatch({type:'LOGIN_PENDING'});
+    let body ={
+      user: user,
+      password: password
     }
 
-}
-export function login(){
-  return function (dispatch){
+    return(axios.post('http://localhost:8000/login', body))
 
   }
 }
+
 export function checkAuth(){
   return function (dispatch){
 
