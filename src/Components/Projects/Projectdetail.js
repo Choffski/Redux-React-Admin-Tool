@@ -21,6 +21,8 @@ class Projectdetail extends Component {
   }
   componentWillReceiveProps(nextProps){
 
+    console.log(nextProps);
+
     if(Object.keys(nextProps.currentProject).length === 0){
     this.props.dispatch(getProjectWithId(this.props.params.id));
     }
@@ -36,13 +38,11 @@ class Projectdetail extends Component {
   }
 
   allowEdit = () =>{
-
     if(!this.state.editable){
     this.setState({editable:true})
   } else{
     this.setState({editable:false})
-
-  }
+    }
   }
 
 

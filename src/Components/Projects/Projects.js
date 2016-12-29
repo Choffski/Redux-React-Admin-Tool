@@ -46,13 +46,12 @@ class Projects extends Component {
           end: new Date(),
           assigned:"none",
           status:"none",
-          id:0
+          id:"56789"
         }
 
-    projects.push(this.state.newProject);
-    this.setState({projects:projects, newProject:defaultObj});
+        this.props.dispatch(project.AddProject(this.state.newProject))
+        this.setState({newProject:defaultObj});
 
-//API call to backend
   }
 
   changeVal = (e) =>{
@@ -75,7 +74,7 @@ class Projects extends Component {
         end: new Date(),
         assigned:"",
         status:"",
-        id:0
+        id:"56789"
       },
       options:[{
         name:'UI/UX design',

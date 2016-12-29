@@ -45,8 +45,10 @@ return function (dispatch){
       }
     }
 
-export function AddProject(){
+export function AddProject(body){
   return function (dispatch){
+    dispatch({type:"ADD_PROJECT_PENDING"});
+    dispatch({type:"ADD_PROJECT_FULFILLED", payload:body});
 
   }
 }

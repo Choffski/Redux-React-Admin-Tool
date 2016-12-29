@@ -36,7 +36,7 @@ export default function reducer (state = initialState, action){
     }
 
     case "ADD_PROJECT_FULFILLED": {
-      return {... state, adding:false, added:true, projects:action.payload}
+      return {... state, adding:false, added:true, projects: state.projects.concat([action.payload])}
       break;
     }
 
