@@ -17,9 +17,6 @@ class Projectdetail extends Component {
     if(this.props.projects.length === 0){
       this.props.dispatch(getAllProjects());
     }
-    // else {
-    // this.props.dispatch(getProjectWithId(this.props.params.id));
-    // }
 
   }
   componentWillReceiveProps(nextProps){
