@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
-import 'whatwg-fetch'
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-import { checkStatus } from '../../Helpers/Helpers'
+
+import { getProjectWithId, getAllProjects, getProjectMember, clearDetails } from '../../Actions/projectActions';
 
 
 import Detailsdata from './Projectdetails/Detailsdata';
@@ -11,20 +12,32 @@ import EditProject from './Projectdetails/EditProject';
 class Projectdetail extends Component {
 
 
-  componentDidMount() {
-    fetch('http://localhost:8000/getProjectDetail/' + this.props.params.id, {
-    'method' : 'GET'}).then(checkStatus)
-    .then(resp =>{
-      return resp.json();
-    }).then(respObj =>{
-      this.setState({project: respObj});
-      this.findUser(respObj.assigned);
-    }).catch(function(error) {
-        console.log('request failed', error)
-        return
-      })
+  componentWillMount() {
+
+    if(this.props.projects.length === 0){
+      this.props.dispatch(getAllProjects());
+    }
+    // else {
+    // this.props.dispatch(getProjectWithId(this.props.params.id));
+    // }
 
   }
+  componentWillReceiveProps(nextProps){
+
+    if(Object.keys(nextProps.currentProject).length === 0){
+    this.props.dispatch(getProjectWithId(this.props.params.id));
+    }
+
+    else if(Object.keys(nextProps.currentProject).length !== 0 && Object.keys(nextProps.currentTeam).length === 0){
+      this.props.dispatch(getProjectMember(nextProps.currentProject.assigned));
+
+    }
+  }
+  componentWillUnmount(){
+    this.props.dispatch(clearDetails());
+
+  }
+
   allowEdit = () =>{
 
     if(!this.state.editable){
@@ -35,27 +48,11 @@ class Projectdetail extends Component {
   }
   }
 
-  findUser = (id) =>{
-    fetch('http://localhost:8000/getUser/'+id, {
-    'method' : 'GET'}).then(checkStatus)
-    .then(resp =>{
-      return resp.json();
-    }).then(respObj =>{
-      this.setState({user: respObj});
-    }).catch(function(error) {
-        console.log('request failed', error)
-        return
-      })
-
-  }
 
   constructor(){
     super();
-    this.findUser = this.findUser.bind(this);
     this.allowEdit = this.allowEdit.bind(this);
     this.state={
-      project:{},
-      user:{},
       editable:false
     }
   }
@@ -63,9 +60,7 @@ class Projectdetail extends Component {
 
 
 
-
   render() {
-    console.log(this.state);
     return (
       <div className="detailContent">
         <div className="btn-bar">
@@ -82,9 +77,9 @@ class Projectdetail extends Component {
         </div>
           {
             this.state.editable?
-            <EditProject project={this.state.project} />
+            <EditProject project={this.props.currentProject} />
             :
-            <Detailsdata project={this.state.project} user={this.state.user} />
+            <Detailsdata project={this.props.currentProject} user={this.props.currentTeam} />
 
           }
 
@@ -94,7 +89,20 @@ class Projectdetail extends Component {
   }
 }
 
+Projectdetail.propTypes = {
+  currentProject: React.PropTypes.object,
+  projects: React.PropTypes.array
+}
+
+function mapStateToProps(store) {
+  return{
+    currentProject: store.projects.currentProject,
+    currentTeam: store.projects.currentProjectTeam,
+    projects: store.projects.projects
+  }
+}
 
 
 
-export default Projectdetail;
+
+export default connect(mapStateToProps)(Projectdetail);

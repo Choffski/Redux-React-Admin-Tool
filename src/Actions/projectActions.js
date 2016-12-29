@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import axios from 'axios'
 import * as fetch from '../Helpers/Helpers';
 
 
@@ -15,11 +15,36 @@ export function getAllProjects(){
   }
 
 }
-export function getProjectWithId(){
+export function getProjectWithId(id){
   return function (dispatch){
-
+    dispatch({type:'CURRENT_PROJECT', payload:id})
   }
+
 }
+
+
+
+export function getProjectMember(id){
+return function (dispatch){
+      dispatch({type:'GET_PROJECT_TEAM_PENDING'});
+
+      axios.get('http://localhost:8000/getUser/'+ id)
+      .then( resp =>{
+        dispatch({type:'GET_PROJECT_TEAM_FULFILLED', payload:resp.data})
+      })
+      .catch(err =>{
+        dispatch({type:'GET_PROJECT_TEAM_REJECTED', payload:err})
+      })
+
+}
+    }
+
+    export function clearDetails(){
+      return function (dispatch){
+        dispatch({type:"CLEAR_CURRENT_PROJECT"})
+      }
+    }
+
 export function AddProject(){
   return function (dispatch){
 

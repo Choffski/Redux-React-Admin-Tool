@@ -13,35 +13,6 @@ import 'whatwg-fetch'
 }
 
 
-export const post = (path, props, callback) => {
-
-console.log(props);
-console.log(JSON.stringify(props));
-  fetch('http://localhost:8000/'+ path , {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify(props)
-})
-.then(checkStatus)
-.then(resp =>{
-return resp.json();
-})
-.then(respObj =>{
-if(respObj.error){
- console.log(respObj.error);
-} else{
-callback(respObj);
-}
-}).catch(function(error) {
- console.log('request failed', error)
-})
-
-}
-
-
-
 export const get = (path, callback) => {
 
 fetch('http://localhost:8000/' + path, {
@@ -61,6 +32,7 @@ fetch('http://localhost:8000/' + path, {
 
 
 export const checkLogin = (nextStage, replace, callback) => {
+
 fetch('http://localhost:8000/validateToken', {
 method: 'POST',
 headers: {
@@ -84,11 +56,5 @@ token: sessionStorage.getItem('token')
 
   })
 
+
 }
-
-
-
-  export const mapStateToProps = (data) => {
-    return  data;
-
-  }

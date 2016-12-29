@@ -26,6 +26,7 @@ class Login extends Component {
        if(resp.data.data){
        sessionStorage.setItem('token', resp.data.data.token);
        this.props.dispatch({type:'LOGIN_FULFILLED'});
+       this.props.dispatch({type:'ADD_CURRENT_USER', payload:resp.data.data.currentUser});
 
 
        hashHistory.push('/main');

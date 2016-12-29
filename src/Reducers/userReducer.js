@@ -23,16 +23,20 @@ export default function reducer (state = initialState, action){
       return {...state, fetching:false, fetched:false, error:action.payload}
       break;
     }
-    case 'FETCH_USERS_DUMMY':{
-      return{...state,fetched:true, fetching:false, activeUser:action.payload}
+    ////////////////////////////////
+
+    case "ADD_CURRENT_USER":{
+      return {...state, activeUser:action.payload}
+      break;
     }
+
     ////////////////////////////////
     case "LOGIN_PENDING":{
       return {...state, fetching:true}
       break;
     }
     case "LOGIN_FULFILLED":{
-      return {...state, fetching:false, isLoggedIn:true}
+      return {...state, fetching:false}
       break;
     }
     case "LOGIN_REJECTED":{

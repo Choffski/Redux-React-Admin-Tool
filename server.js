@@ -85,7 +85,6 @@ app.get('/getUser/:id', function(req,res){
           data: null
         })
       } else {
-        console.log(decoded.data);
 
         if(typeof decoded.data != undefined && decoded.data != null){
           res.send({
@@ -118,7 +117,14 @@ app.get('/getUser/:id', function(req,res){
                   jwt.sign({
                     data: userdata
                   }, config.secret, {expiresIn : '1h'}),
-            'status': 'success'
+            'status': 'success',
+            'currentUser':
+            {
+              name: userdata.fname + ' ' + userdata.lname,
+              id: userdata.id,
+              username: userdata.user
+
+            }
           },
           'error': null
         })
